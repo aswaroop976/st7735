@@ -1,0 +1,7 @@
+STLinkV2 errors:
+	- jtag error: just unplug and plug it back it a bunch of times(also triple check if you connected to stm32f411ce properly first, swclk and swdio are good?)
+	- ongoing issue, my stlink might just be faulty idk
+
+What just happened there?!:
+	- Only the backlight was turning on for the display, and when I randomly nudged it, the display showed ferris. What happend there idk, but it works now, yipeeeeeee!!
+

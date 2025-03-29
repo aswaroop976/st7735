@@ -1,0 +1,15 @@
+[package]
+name = "st7735"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.5"
+embedded-graphics = "0.8.1"
+embedded-hal-bus = "0.1"
+panic-halt = "1.0.0"
+panic-probe = "0.3.2"
+st7735-lcd = "0.10.0"
+stm32f4xx-hal = {version = "0.22.1", features = ["stm32f411"]}
+

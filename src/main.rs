@@ -7,6 +7,7 @@ use panic_halt as _;
 extern crate stm32f4xx_hal as hal;
 
 use cortex_m_rt::entry;
+use embedded_graphics::{image::Image, pixelcolor::Rgb888, prelude::*};
 use embedded_graphics::{
     pixelcolor::{Rgb565, raw::LittleEndian},
     prelude::*,
@@ -17,6 +18,7 @@ use hal::{
     {pac, prelude::*},
 };
 use st7735_lcd::Orientation;
+use tinytga::Tga;
 
 const SYSFREQ: u32 = 100_000_000;
 const IMAGE_WIDTH: u16 = 86;
@@ -77,13 +79,18 @@ fn main() -> ! {
     let xpos = (160 - IMAGE_WIDTH) / 2;
     let ypos = (128 - IMAGE_HEIGHT) / 2;
     // draw ferris
-    let image: embedded_graphics::image::ImageRaw<Rgb565, LittleEndian> =
-        embedded_graphics::image::ImageRaw::new(
-            include_bytes!("../ferris.raw"),
-            IMAGE_WIDTH as u32,
-        );
+    let data = include_bytes!("../target.tga");
+    let tga: Tga<Rgb565> = Tga::from_slice(data).unwrap();
+    let image = Image::new(&tga, Point::zero());
+    //let image: embedded_graphics::image::ImageRaw<Rgb565, LittleEndian> =
+    //    embedded_graphics::image::ImageRaw::new(
+    //        //include_bytes!("../ferris.raw"),
+    //        //include_bytes!("../eva-title.raw"),
+    //        &tga,
+    //        IMAGE_WIDTH as u32,
+    //    );
 
-    disp.set_offset(xpos, ypos);
+    //disp.set_offset(xpos, ypos);
     image.draw(&mut disp).unwrap();
 
     loop {
